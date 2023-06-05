@@ -2,11 +2,17 @@ import { ref } from "vue"
 
 export const UseQrReader = () =>{      
   
-  let url= ref(null);
+  let url='';
+  const dataQR= ref(null);
   let nameQR = ref(null);
   let experienceQR = ref(null);
   let heightQR = ref(null);
   let  weightQR = ref(null);
+  let nameS = false;
+
+  /*Método QR: activa la cámara del dispositivo para leer un código QR y recoge la url.
+  Pinta la imagen del pokemon en el container img. 
+  */
   
 const QR = async()=>  {
    
@@ -30,7 +36,8 @@ const QR = async()=>  {
       var qrWorker = new Worker("jsqr.js");
       
       const scanVideoFrame = async()=> {
-                 
+             
+    
         if (video.readyState === video.HAVE_ENOUGH_DATA) {
           canvas.width = video.videoWidth;
           canvas.height = video.videoHeight;
@@ -44,7 +51,7 @@ const QR = async()=>  {
           if (code) {
             // Se encontró un código QR
             
-            url = code.data;           
+           url = code.data;
            
             const pokemonToFind = await fetch(`${url}`)       
             const pokemon = await pokemonToFind.json();
@@ -70,8 +77,8 @@ const QR = async()=>  {
     );
    
   }
- 
-const info = async() =>{ 
+ //Método abilities recoge la url del método QR y pinta la información del pokemon en el containerTxt
+  const info = async() =>{ 
     if(url == ''){
       alert('You must first look for a pokemon ')
     }else{
@@ -101,7 +108,7 @@ const info = async() =>{
     
   }
  
-    
+//Método abilities recoge la url del método QR y pinta las abilidades del pokemon en el containerTxt
  const abilities =   async() =>{
   if(url == ''){
     alert('You must first look for a pokemon ')
@@ -132,6 +139,8 @@ const info = async() =>{
       }    
   }
   }
+
+  //Método stat recoge la url del método QR y pinta las estadísticas del pokemon en el containerTxt
    const stat = async()=>{
     if(url == ''){
       alert('You must first look for a pokemon ')
@@ -168,9 +177,8 @@ const info = async() =>{
   }
   return{
     QR,
-    //info,
+    info,
     abilities,
-    stat, 
-    info
+    stat,   
   };
 }

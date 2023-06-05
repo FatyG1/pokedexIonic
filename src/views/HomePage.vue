@@ -119,7 +119,8 @@
       </ion-row>
     </ion-grid>
 
-    <!-- Modal -->
+    <!-- Ventana modal: se activará al pulsar el botón de la lupa. El usuario introducira 
+      en el input el id o el nombre del pokemon que desea buscar -->
     <ion-modal trigger="open-modal" :initial-breakpoint="1" :breakpoints="[0, 1]">
     
       <label> Search Pokemon:  </label>
@@ -167,11 +168,14 @@ export default defineComponent({
     nameS :  '',
 }), 
 methods: {
-
+  //Método clean: pone en blanco el containerTxt
 async clean(){
   document.querySelector('.containerTxt').innerHTML =  ``
 
   },
+  // Método searchPokemon: recoge el valor introducido en el input del modal y devuelve los datos del pokemon 
+  //Pinta la imagen en el containerImg
+  // Llama al método clean
   async searchPokemon() {(``)
   this.nameS = true;
    
@@ -190,6 +194,7 @@ async clean(){
     }
   
   },
+  //Método abilitiesPokemon recoge los datos recuperados en el método SearchPokemon y pinta las abilidades en el containerTxt
   async abilitiesPokemon(){(``)
     let name = this.pokemonData.name; 
     let ab=[] 
@@ -215,6 +220,7 @@ async clean(){
       alert('You must first look for a pokemon ')
     }    
 },
+  //Método statPokemon recoge los datos recuperados en el método SearchPokemon y pinta las estadísticas en el containerTxt
 async statPokemon(){(``)
   let name = this.pokemonData.name;
   let statName=[] 
@@ -245,6 +251,7 @@ async statPokemon(){(``)
     }
   
 },
+  //Método infoPokemon recoge los datos recuperados en el método SearchPokemon y pinta la información en el containerTxt
 async infoPokemon(){(``)
  let name = this.pokemonData.name;
   let experience = this.pokemonData.base_experience;
