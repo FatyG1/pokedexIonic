@@ -1,15 +1,12 @@
 import { ref } from "vue"
 
-export const UseQrReader = () =>{
-      
+export const UseQrReader = () =>{      
   
-  let url='';
-  const dataQR= ref(null);
+  let url= ref(null);
   let nameQR = ref(null);
   let experienceQR = ref(null);
   let heightQR = ref(null);
   let  weightQR = ref(null);
-  let nameS = false;
   
 const QR = async()=>  {
    
@@ -33,8 +30,7 @@ const QR = async()=>  {
       var qrWorker = new Worker("jsqr.js");
       
       const scanVideoFrame = async()=> {
-             
-    
+                 
         if (video.readyState === video.HAVE_ENOUGH_DATA) {
           canvas.width = video.videoWidth;
           canvas.height = video.videoHeight;
@@ -48,7 +44,7 @@ const QR = async()=>  {
           if (code) {
             // Se encontró un código QR
             
-           url = code.data;
+            url = code.data;           
            
             const pokemonToFind = await fetch(`${url}`)       
             const pokemon = await pokemonToFind.json();
@@ -75,7 +71,7 @@ const QR = async()=>  {
    
   }
  
-  const info = async() =>{ 
+const info = async() =>{ 
     if(url == ''){
       alert('You must first look for a pokemon ')
     }else{
@@ -172,9 +168,9 @@ const QR = async()=>  {
   }
   return{
     QR,
-    info,
+    //info,
     abilities,
-    stat,
-   
+    stat, 
+    info
   };
 }

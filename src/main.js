@@ -24,6 +24,8 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import './theme/main.css';
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
+import VueVirtualScroller from 'vue-virtual-scroller';
 
 
 const app = createApp(App)
