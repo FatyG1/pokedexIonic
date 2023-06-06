@@ -1,7 +1,6 @@
 import { ref } from "vue"
 
-export const UseQrReader = () =>{
-      
+export const UseQrReader = () =>{      
   
   let url='';
   const dataQR= ref(null);
@@ -9,7 +8,10 @@ export const UseQrReader = () =>{
   let experienceQR = ref(null);
   let heightQR = ref(null);
   let  weightQR = ref(null);
-  let nameS = false;
+
+  /*Método QR: activa la cámara del dispositivo para leer un código QR y recoge la url.
+  Pinta la imagen del pokemon en el container img. 
+  */
   
 const QR = async()=>  {
    
@@ -48,7 +50,7 @@ const QR = async()=>  {
           if (code) {
             // Se encontró un código QR
             
-           url = code.data;
+            url = code.data;
            
             const pokemonToFind = await fetch(`${url}`)       
             const pokemon = await pokemonToFind.json();
@@ -74,8 +76,8 @@ const QR = async()=>  {
     );
    
   }
- 
-  const info = async() =>{ 
+ //Método abilities recoge la url del método QR y pinta la información del pokemon en el containerTxt
+  const infoQR = async() =>{ 
     if(url == ''){
       alert('You must first look for a pokemon ')
     }else{
@@ -105,8 +107,8 @@ const QR = async()=>  {
     
   }
  
-    
- const abilities =   async() =>{
+//Método abilities recoge la url del método QR y pinta las abilidades del pokemon en el containerTxt
+ const abilitiesQR =   async() =>{
   if(url == ''){
     alert('You must first look for a pokemon ')
   }else{
@@ -136,7 +138,9 @@ const QR = async()=>  {
       }    
   }
   }
-   const stat = async()=>{
+
+  //Método stat recoge la url del método QR y pinta las estadísticas del pokemon en el containerTxt
+   const statQR = async()=>{
     if(url == ''){
       alert('You must first look for a pokemon ')
     }else{
@@ -172,9 +176,8 @@ const QR = async()=>  {
   }
   return{
     QR,
-    info,
-    abilities,
-    stat,
-   
-  };
+    abilitiesQR,
+    statQR,   
+    infoQR
+    };
 }
